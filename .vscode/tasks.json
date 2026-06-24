@@ -1,0 +1,74 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "coverage-full-report",
+            "type": "shell",
+            "detail": "Generates full coverage report",
+            "group": "test",
+            "options": {
+                "statusbar": {
+                    "hide": false
+                },
+                "cwd": "${workspaceFolder}/MutationTestPlayground"
+            },
+            "command": " dotnet-coverage collect --output ./Debug/Coverage/coverage.cobertura.xml --output-format cobertura dotnet test; reportgenerator -reports:./Debug/Coverage/coverage.cobertura.xml -targetdir:./Debug/Coverage/coverage-report -reporttypes:Html -assemblyfilters:-*.UnitTests.Biz; ./Debug/Coverage/coverage-report/index.html",
+            "dependsOn": [
+                "install-coverage"
+            ]
+        },
+        {
+            "label": "mutation-report",
+            "type": "shell",
+            "detail": "Generates mutation report",
+            "group": "test",
+            "options": {
+                "statusbar": {
+                    "hide": false
+                },
+                "cwd": "${workspaceFolder}/${input:csProj}"
+            },
+            "command": "dotnet stryker -o --skip-version-check -f ${workspaceFolder}/Cmf.Custom.Business/Cmf.Custom.UnitTests.Biz/stryker-config.json -tp ${workspaceFolder}/Cmf.Custom.Business/Cmf.Custom.UnitTests.Biz/Cmf.Custom.UnitTests.Biz.csproj",
+            "dependsOn": [
+                "install-stryker"
+            ]
+        },
+        {
+            "label": "install-stryker",
+            "type": "shell",
+            "detail": "Installs/Updates Stryker as global tool. Required for Mutation reports",
+            "group": "test",
+            "options": {
+                "statusbar": {
+                    "hide": true
+                },
+                "cwd": "${workspaceFolder}"
+            },
+            "command": "dotnet tool install -g dotnet-stryker"
+        },
+        {
+            "label": "install-coverage",
+            "type": "shell",
+            "detail": "Installs/Updates Stryker as global tool. Required for Mutation reports",
+            "group": "test",
+            "options": {
+                "statusbar": {
+                    "hide": true
+                },
+                "cwd": "${workspaceFolder}/Cmf.Custom.Business"
+            },
+            "command": "dotnet tool install -g dotnet-coverage"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "csProj",
+            "description": "Custom Projects",
+            "type": "pickString",
+            "options": [
+                "MutationTestPlayground",
+                "MutationTestPlayground/MutationTestPlayground"
+            ]
+        }
+    ]
+}
