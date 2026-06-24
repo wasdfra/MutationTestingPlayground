@@ -1,9 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Cmf.Foundation.BusinessObjects" Version="11.3.1" />
+		<PackageReference Include="Cmf.Foundation.BusinessOrchestration" Version="11.3.1" />
+		<PackageReference Include="Cmf.Foundation.Common" Version="11.3.1" />
+		<PackageReference Include="Cmf.Foundation.ExpressionEvaluator" Version="11.3.1" />
+		<PackageReference Include="Cmf.Navigo.BusinessObjects" Version="11.3.1"/>
+		<PackageReference Include="Cmf.Navigo.BusinessOrchestration" Version="11.3.1"/>
+	</ItemGroup>
 </Project>

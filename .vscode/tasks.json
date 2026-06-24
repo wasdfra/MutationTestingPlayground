@@ -28,7 +28,7 @@
                 },
                 "cwd": "${workspaceFolder}/${input:csProj}"
             },
-            "command": "dotnet stryker -o --skip-version-check -f ${workspaceFolder}/Cmf.Custom.Business/Cmf.Custom.UnitTests.Biz/stryker-config.json -tp ${workspaceFolder}/Cmf.Custom.Business/Cmf.Custom.UnitTests.Biz/Cmf.Custom.UnitTests.Biz.csproj",
+            "command": "dotnet stryker -o --skip-version-check -f ${workspaceFolder}/MutationTestPlayground/MutationTestPlayground.TestProject/striker-config.json -tp ${workspaceFolder}/MutationTestPlayground/MutationTestPlayground.TestProject/MutationTestPlayground.TestProject.csproj.csproj",
             "dependsOn": [
                 "install-stryker"
             ]
@@ -55,7 +55,7 @@
                 "statusbar": {
                     "hide": true
                 },
-                "cwd": "${workspaceFolder}/Cmf.Custom.Business"
+                "cwd": "${workspaceFolder}"
             },
             "command": "dotnet tool install -g dotnet-coverage"
         }
@@ -68,7 +68,8 @@
             "options": [
                 "MutationTestPlayground",
                 "MutationTestPlayground/MutationTestPlayground"
-            ]
+            ],
+            "default": "MutationTestPlayground"
         }
     ]
 }
