@@ -3,6 +3,7 @@ using Cmf.Foundation.Common.Abstractions;
 using Cmf.Navigo.BusinessObjects.Abstractions;
 using Moq;
 using MutationTestPlayground;
+using Stimulsoft.System.Windows.Forms;
 
 namespace MutationTestPlayground.TestProject
 {
@@ -23,17 +24,6 @@ namespace MutationTestPlayground.TestProject
             CustomGetLotDetailsIntegrationHandler = new();
             ActionMock = new();
 
-            MaterialMock = new();
-            MaterialMock
-                .Setup(mm => mm.ObjectExists())
-                .Returns(true);
-            MaterialMock
-                .SetupGet(mm => mm.Form)
-                .Returns(Lot);
-            MaterialMock
-                .Setup(m => m.Name)
-                .Returns("Mock Name");
-            AddMockToActionInput(MaterialMock);
 
             ResultDictionary = new Dictionary<string, object>
             {
@@ -63,6 +53,13 @@ namespace MutationTestPlayground.TestProject
         public void DeeActionCode_WhenMaterialDoesNotExist_ShouldNotExecuteAction()
         {
             // Arrange
+            var MaterialMock = new Mock<IMaterial>();
+            MaterialMock
+                .SetupGet(mm => mm.Form)
+                .Returns(Lot);
+            MaterialMock
+                .Setup(m => m.Name)
+                .Returns("Mock Name");
             MaterialMock
                 .Setup(mm => mm.ObjectExists())
                 .Returns(false);
@@ -79,6 +76,16 @@ namespace MutationTestPlayground.TestProject
         public void DeeTestCondition_WhenExecutingHappyPath_ShouldNotThrowException()
         {
             // Arrange
+            var MaterialMock = new Mock<IMaterial>();
+            MaterialMock
+                .SetupGet(mm => mm.Form)
+                .Returns(Lot);
+            MaterialMock
+                .Setup(m => m.Name)
+                .Returns("Mock Name");
+            
+            AddMockToActionInput(MaterialMock);
+
             ActionInput.Add(MaterialName, MaterialMock.Object);
 
             // Act & Assert
